@@ -14,6 +14,11 @@ import { UserService } from "../user/services/user.service";
 import { NavComponent } from "./root/nav/nav.component";
 import { LoginComponent } from "../user/components/login/login.component";
 import { RegistrationComponent } from "../user/components/registration/registration.component";
+import { AllEstatesComponent } from "../estate/components/all-estates/all-estates.component";
+import { EstateService } from "../estate/services/estate.service";
+import { SettlementService } from "../settlement/services/settlement.service";
+import { AddEstateComponent } from "../estate/components/add-estate/add-estate.component";
+import { DetailsEstateComponent } from "../estate/components/details-estate/details-estate.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -25,6 +30,9 @@ export function appInitializer(userService: UserService) {
     NavComponent,
     LoginComponent,
     RegistrationComponent,
+    AllEstatesComponent,
+    AddEstateComponent,
+    DetailsEstateComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +61,9 @@ export function appInitializer(userService: UserService) {
       useClass: ErrorInterceptor,
       multi: true,
     },
+    UserService,
+    EstateService,
+    SettlementService,
   ],
   bootstrap: [AppComponent],
 })

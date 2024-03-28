@@ -1,20 +1,16 @@
 ﻿using RealEstate.Models.Enums;
 
-namespace RealEstate.Models.Dtos
+namespace RealEstate.Models.Dtos.EstateDtos
 {
-    public class EstateGetDto
+    public class EstateAddDto
     {
-        public int Id { get; set; }
-
-        public string EstateBrokerUsername { get; set; }
-
         public EstateType Type { get; set; }
 
         public decimal Price { get; set; }
 
         public int Size { get; set; }
 
-        public string SettlementName { get; set; }
+        public int SettlementId { get; set; }
 
         public int? Floor { get; set; }
     }

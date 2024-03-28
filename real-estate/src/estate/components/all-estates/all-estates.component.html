@@ -1,0 +1,153 @@
+<div class="container">
+  <form #filterForm="ngForm" (ngSubmit)="getFiltered(estateFilterDto)">
+    <div class="form-group">
+      <label for="type"> Тип на имота: </label>
+
+      <select
+        [(ngModel)]="estateFilterDto.type"
+        class="form-control"
+        name="type"
+        id="type"
+      >
+        <option></option>
+        <option value="1">1-стаен</option>
+        <option value="2">2-стаен</option>
+        <option value="3">3-стаен</option>
+        <option value="4">4-стаен</option>
+        <option value="5">офис</option>
+        <option value="6">къща</option>
+        <option value="7">магазин</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="minPrice"> Минимална цена: </label>
+
+      <input
+        type="number"
+        name="minPrice"
+        id="minPrice"
+        class="form-control"
+        min="0"
+        placeholder="0"
+        [(ngModel)]="estateFilterDto.priceMin"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="maxPrice"> Максимална цена: </label>
+
+      <input
+        type="number"
+        name="maxPrice"
+        id="maxPrice"
+        class="form-control"
+        min="0"
+        placeholder="0"
+        [(ngModel)]="estateFilterDto.priceMax"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="minSize"> Минимална квадратура: </label>
+
+      <input
+        type="number"
+        name="minSize"
+        id="minSize"
+        class="form-control"
+        min="0"
+        placeholder="0"
+        [(ngModel)]="estateFilterDto.sizeMin"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="maxSize"> Максимална квадратура: </label>
+
+      <input
+        type="number"
+        name="maxSize"
+        id="maxSize"
+        class="form-control"
+        min="0"
+        placeholder="0"
+        [(ngModel)]="estateFilterDto.sizeMax"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="settlementId"> Населено място: </label>
+
+      <select
+        [(ngModel)]="estateFilterDto.settlementId"
+        class="form-control"
+        name="settlementId"
+        id="settlementId"
+      >
+        <option value="0"></option>
+        <option
+          *ngFor="let settlement of settlements"
+          [ngValue]="settlement.id"
+        >
+          {{ settlement.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-primary" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Търси
+      </button>
+    </div>
+  </form>
+
+  <h2>Имоти</h2>
+  <div class="buttons">
+    <button
+      *ngIf="
+        userService.currentUser != null && userService.currentUser.role == 1
+      "
+      routerLink="/addEstate"
+      class="btn btn-primary"
+    >
+      Добави
+    </button>
+  </div>
+  <table
+    *ngIf="this.estates.length > 0"
+    class="table table-bordered table-hover"
+  >
+    <thead class="table-danger">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Брокер</th>
+        <th scope="col">Вид на имота</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Квадратура</th>
+        <th scope="col">Населено място</th>
+        <th scope="col">Етаж</th>
+        <th scope="col">Детайли</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let estate of estates; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ estate.estateBrokerUsername }}</td>
+        <td>{{ estateTypeLocalization[estate.estateType] }}</td>
+        <td>{{ estate.price }} лв.</td>
+        <td>{{ estate.size }}</td>
+        <td>{{ estate.settlementName }}</td>
+        <td>{{ estate.floor }}</td>
+        <td>
+          <button
+            class="btn btn-primary"
+            [routerLink]="['/detailsEstate', estate.id]"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

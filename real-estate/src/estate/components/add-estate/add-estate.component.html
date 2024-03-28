@@ -1,0 +1,79 @@
+<div class="container form">
+  <h1>Добави имот</h1>
+  <div class="form-group">
+    <label for="type"><span class="important">*</span> Тип на имота: </label>
+
+    <select
+      [(ngModel)]="estateDto.type"
+      class="form-control"
+      name="type"
+      id="type"
+    >
+      <option [ngValue]="1">1-стаен</option>
+      <option [ngValue]="2">2-стаен</option>
+      <option [ngValue]="3">3-стаен</option>
+      <option [ngValue]="4">4-стаен</option>
+      <option [ngValue]="5">офис</option>
+      <option [ngValue]="6">къща</option>
+      <option [ngValue]="7">магазин</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="price"><span class="important">*</span> Цена: </label>
+
+    <input
+      type="number"
+      name="price"
+      id="price"
+      class="form-control"
+      min="0"
+      placeholder="0"
+      [(ngModel)]="estateDto.price"
+    />
+  </div>
+  <div class="form-group">
+    <label for="size"><span class="important">*</span> Квадратура: </label>
+
+    <input
+      type="number"
+      name="size"
+      id="size"
+      class="form-control"
+      min="0"
+      placeholder="0"
+      [(ngModel)]="estateDto.size"
+    />
+  </div>
+  <div class="form-group">
+    <label for="settlementId"
+      ><span class="important">*</span> Населено място:
+    </label>
+
+    <select
+      [(ngModel)]="estateDto.settlementId"
+      class="form-control"
+      name="settlementId"
+      id="settlementId"
+    >
+      <option *ngFor="let settlement of settlements" [ngValue]="settlement.id">
+        {{ settlement.name }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="floor">Етаж: </label>
+
+    <input
+      type="number"
+      name="floor"
+      id="floor"
+      class="form-control"
+      min="0"
+      placeholder="0"
+      [(ngModel)]="estateDto.floor"
+    />
+  </div>
+  <div class="btn-wrapper">
+    <button class="btn btn-success" (click)="add()">Добави</button>
+  </div>
+</div>

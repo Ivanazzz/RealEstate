@@ -12,7 +12,9 @@ namespace RealEstate
         {
             services
                 .AddScoped<IUserRepository, UserRepository>()
-                .AddScoped<IEstateRepository, EstateRepository>();
+                .AddScoped<IEstateRepository, EstateRepository>()
+                .AddScoped<ISettlementRepository, SettlementRepository>()
+                .AddScoped<IInspectionRepository, InspectionRepository>();
 
             return services;
         }

@@ -10,5 +10,7 @@ namespace RealEstate.Repositories.Contracts
         public Task<List<InspectionGetDto>> GetAllAsync(string username);
 
         public Task ChangeStatusAsync(string username, int inspectionId, Status status);
+
+        Task<List<InspectionGetDto>> GetFilteredAsync(InspectionFilterDto inspectionFilter);
     }
 }

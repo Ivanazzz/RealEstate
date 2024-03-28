@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealEstate.Models;
 using RealEstate.Models.CustomExceptions;
+using RealEstate.Models.Dtos.EstateDtos;
 using RealEstate.Models.Dtos.InspectionDtos;
 using RealEstate.Models.Entities;
 using RealEstate.Models.Enums;
@@ -126,6 +127,24 @@ namespace RealEstate.Repositories.Repostories
             .ToListAsync();
 
             return inspectionDtos;
+        }
+
+        public async Task<List<InspectionGetDto>> GetFilteredAsync(InspectionFilterDto inspectionFilter)
+        {
+            var inspections = await inspectionFilter
+                .WhereBuilder(context.Inspections)
+                .Select(i => new InspectionGetDto
+                {
+                    Id = i.Id,
+                    UserId = i.UserId,
+                    Username = i.User.Username,
+                    InspectionDate = i.InspectionDate,
+                    EstateId = i.EstateId,
+                    Status = i.Status,
+                })
+                .ToListAsync();
+
+            return inspections;
         }
     }
 }

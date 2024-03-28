@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.Attributes;
+using RealEstate.Models.Dtos.EstateDtos;
 using RealEstate.Models.Dtos.InspectionDtos;
 using RealEstate.Models.Enums;
 using RealEstate.Repositories.Contracts;
@@ -51,6 +52,14 @@ namespace RealEstate.Controllers
             await inspectionRepository.ChangeStatusAsync(username, inspectionId, status);
 
             return Ok();
+        }
+
+        [HttpGet("Filtered")]
+        public async Task<IActionResult> GetFilteredAsync([FromQuery] InspectionFilterDto inspectionFilter)
+        {
+            var inspections = await inspectionRepository.GetFilteredAsync(inspectionFilter);
+
+            return Ok(inspections);
         }
     }
 }

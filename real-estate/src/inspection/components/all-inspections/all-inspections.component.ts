@@ -3,6 +3,7 @@ import { InspectionGetDto } from "../../dtos/inspection-get-dto";
 import { InspectionService } from "../../services/inspection.service";
 import { catchError, throwError } from "rxjs";
 import { Status, StatusLocalization } from "../../enums/status";
+import { InspectionFilterDto } from "../../dtos/inspection-filter-dto";
 
 @Component({
   selector: "app-all-inspections",
@@ -11,6 +12,7 @@ import { Status, StatusLocalization } from "../../enums/status";
 })
 export class AllInspectionsComponent {
   inspections: InspectionGetDto[] = [];
+  inspectionFilterDto: InspectionFilterDto = new InspectionFilterDto();
 
   statusLocalization = StatusLocalization;
 
@@ -53,5 +55,18 @@ export class AllInspectionsComponent {
         })
       )
       .subscribe((res) => {});
+  }
+
+  getFiltered(inspectionFilterDto: InspectionFilterDto) {
+    this.inspectionService
+      .getFiltered(inspectionFilterDto)
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res) => {
+        this.inspections = res;
+      });
   }
 }

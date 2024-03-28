@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { InspectionAddDto } from "../dtos/inspection-add-dto";
 import { InspectionGetDto } from "../dtos/inspection-get-dto";
 import { Status } from "../enums/status";
+import { InspectionFilterDto } from "../dtos/inspection-filter-dto";
 
 @Injectable({
   providedIn: "root",
@@ -29,5 +30,20 @@ export class InspectionService {
     return this.http.post<void>(`${this.baseUrl}/ChangeStatus`, null, {
       params,
     });
+  }
+
+  getFiltered(
+    inspectionDto: InspectionFilterDto
+  ): Observable<InspectionGetDto[]> {
+    return this.http.get<InspectionGetDto[]>(
+      `${this.baseUrl}/Filtered?${this.composeQueryString(inspectionDto)}`
+    );
+  }
+
+  composeQueryString(inspectionDto: InspectionFilterDto): string {
+    return Object.entries(inspectionDto)
+      .filter(([_, value]) => value !== null)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
   }
 }

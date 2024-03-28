@@ -1,0 +1,55 @@
+<div class="container register-form">
+  <h1>Регистриране</h1>
+  <div class="form-group">
+    <label for="username">
+      <span class="important">*</span>
+      Потребителско име:
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="userDto.username"
+      id="username"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="password">
+      <span class="important">*</span>
+      Парола:
+    </label>
+    <input
+      type="password"
+      class="form-control"
+      [(ngModel)]="userDto.password"
+      id="password"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="role">
+      <span class="important">*</span>
+      Роля:
+    </label>
+    <select
+      name="role"
+      [(ngModel)]="userDto.role"
+      id="role"
+      class="form-control"
+      required
+    >
+      <option [ngValue]="role.Broker">Брокер</option>
+      <option [ngValue]="role.Individual">Физическо лице</option>
+    </select>
+  </div>
+  <div class="btn-wrapper">
+    <button
+      (click)="onSubmit()"
+      class="btn btn-success"
+      [disabled]="!isFormValid()"
+    >
+      Завърши
+    </button>
+  </div>
+</div>

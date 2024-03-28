@@ -1,0 +1,22 @@
+nav {
+  background-color: #e6e9ed;
+}
+
+button {
+  font-weight: bold;
+}
+
+.nav-bar-right {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nav-bar-left {
+  display: flex;
+  justify-content: center;
+}
+
+#btn {
+  margin-right: 20px;
+}

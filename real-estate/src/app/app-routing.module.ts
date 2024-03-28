@@ -5,6 +5,7 @@ import { RegistrationComponent } from "../user/components/registration/registrat
 import { AllEstatesComponent } from "../estate/components/all-estates/all-estates.component";
 import { AddEstateComponent } from "../estate/components/add-estate/add-estate.component";
 import { DetailsEstateComponent } from "../estate/components/details-estate/details-estate.component";
+import { AllInspectionsComponent } from "../inspection/components/all-inspections/all-inspections.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: "detailsEstate/:id",
     component: DetailsEstateComponent,
+  },
+  {
+    path: "inspections",
+    component: AllInspectionsComponent,
   },
 ];
 

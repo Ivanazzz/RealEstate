@@ -7,6 +7,8 @@ import { ActivatedRoute } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { EstateUpdateDto } from "../../dtos/estate-update-dto";
 import { UserService } from "../../../user/services/user.service";
+import { InspectionAddDto } from "../../../inspection/dtos/inspection-add-dto";
+import { InspectionService } from "../../../inspection/services/inspection.service";
 
 @Component({
   selector: "app-details-estate",
@@ -19,11 +21,15 @@ export class DetailsEstateComponent {
   settlements: SettlementGetDto[] = [];
   estateId: number;
 
+  inspectionDto: InspectionAddDto = new InspectionAddDto();
+  wantToAddInspection = false;
+
   constructor(
     private route: ActivatedRoute,
     private estateService: EstateService,
     private settlementService: SettlementService,
-    public userService: UserService
+    public userService: UserService,
+    private inspectionService: InspectionService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +70,23 @@ export class DetailsEstateComponent {
 
     this.estateService
       .update(this.estateUpdateDto)
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res) => {});
+  }
+
+  changeState() {
+    this.wantToAddInspection = true;
+  }
+
+  addInspection() {
+    this.inspectionDto.estateId = this.estateDto.id;
+
+    this.inspectionService
+      .add(this.inspectionDto)
       .pipe(
         catchError((err) => {
           return throwError(() => err);

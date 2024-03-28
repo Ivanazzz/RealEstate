@@ -1,0 +1,46 @@
+<div class="container">
+  <h2>Огледи</h2>
+  <div class="buttons"></div>
+  <table
+    *ngIf="this.inspections.length > 0"
+    class="table table-bordered table-hover"
+  >
+    <thead class="table-danger">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Завил</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Имот</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Приеми</th>
+        <th scope="col">Откажи</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inspection of inspections; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ inspection.username }}</td>
+        <td>{{ inspection.inspectionDate | date }}</td>
+        <td>
+          <button
+            class="btn btn-primary"
+            [routerLink]="['/detailsEstate', inspection.estateId]"
+          >
+            Виж имот
+          </button>
+        </td>
+        <td>{{ statusLocalization[inspection.status] }}</td>
+        <td>
+          <button (click)="confirm(inspection.id)" class="btn btn-success">
+            <i class="fa-solid fa-check"></i>
+          </button>
+        </td>
+        <td>
+          <button (click)="decline(inspection.id)" class="btn btn-danger">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

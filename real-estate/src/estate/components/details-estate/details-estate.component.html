@@ -85,5 +85,42 @@
     >
       Промени
     </button>
+    <button
+      *ngIf="
+        userService.currentUser != null &&
+        userService.currentUser.role == 2 &&
+        wantToAddInspection == false
+      "
+      class="btn btn-primary"
+      type="submit"
+      (click)="changeState()"
+    >
+      Добави за оглед
+    </button>
+  </div>
+  <div
+    *ngIf="
+      userService.currentUser != null &&
+      userService.currentUser.role == 2 &&
+      wantToAddInspection == true
+    "
+    class="date-container"
+  >
+    <div class="form-group">
+      <label for="inspectionDate">
+        <span class="important">*</span>
+        Дата на оглед:
+      </label>
+      <input
+        type="date"
+        class="form-control"
+        id="inspectionDate"
+        [(ngModel)]="inspectionDto.inspectionDate"
+        required
+      />
+    </div>
+    <button class="btn btn-primary" type="submit" (click)="addInspection()">
+      Добави за оглед
+    </button>
   </div>
 </div>

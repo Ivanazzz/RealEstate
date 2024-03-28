@@ -134,7 +134,7 @@
       <tr *ngFor="let estate of estates; index as i">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ estate.estateBrokerUsername }}</td>
-        <td>{{ estateTypeLocalization[estate.estateType] }}</td>
+        <td>{{ estateTypeLocalization[estate.type] }}</td>
         <td>{{ estate.price }} лв.</td>
         <td>{{ estate.size }}</td>
         <td>{{ estate.settlementName }}</td>

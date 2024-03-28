@@ -19,6 +19,8 @@ import { EstateService } from "../estate/services/estate.service";
 import { SettlementService } from "../settlement/services/settlement.service";
 import { AddEstateComponent } from "../estate/components/add-estate/add-estate.component";
 import { DetailsEstateComponent } from "../estate/components/details-estate/details-estate.component";
+import { InspectionService } from "../inspection/services/inspection.service";
+import { AllInspectionsComponent } from "../inspection/components/all-inspections/all-inspections.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -33,6 +35,7 @@ export function appInitializer(userService: UserService) {
     AllEstatesComponent,
     AddEstateComponent,
     DetailsEstateComponent,
+    AllInspectionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ export function appInitializer(userService: UserService) {
     UserService,
     EstateService,
     SettlementService,
+    InspectionService,
   ],
   bootstrap: [AppComponent],
 })
